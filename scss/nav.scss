@@ -1,0 +1,72 @@
+$head_top:54px;
+$head_width:50%;
+
+$headTopMobile:44px;
+
+.head{
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:9999;
+	width:100%;
+	height:$head_top;
+	background:rgba(255,255,255,1.00);
+	-webkit-box-shadow: 0px 0px 1px rgba(0,0,0,.3);
+	-moz-box-shadow: 0px 0px 1px rgba(0,0,0,.3); /* 老的 Firefox */
+	box-shadow: 0px 0px 1px  rgba(0,0,0,.3);
+	
+	.head-left{
+		float:left;
+		height:$head_top;
+		width:$head_width;
+	}
+	
+	.head-right{
+		float:right;
+		height:$head_top;
+		// width:$head_width;
+		padding-right: 20px;
+		font-size:14px;
+		text-align:right;
+		a{
+			display:inline-block;
+			height:$head_top;
+			line-height:$head_top;
+			color:rgba(0,0,0,.6);
+			font-size:14px;
+		}
+		.username{
+			float:left;
+			// max-width:125px;
+			overflow: hidden;
+		}
+		.btn-logout{
+			float:right;
+		}
+	}
+	.logo-img{
+		float:left;
+		width:auto;
+		height:100%;
+	}
+}
+
+@media (min-width: 301px) and (max-width: 767px){
+	.head{
+		height:$headTopMobile;
+		.head-left{height:$headTopMobile;}
+		.head-right{
+			height:$headTopMobile;
+			a{
+				height:$headTopMobile;
+				line-height:$headTopMobile;
+			}
+			.username{
+				float:left;
+				max-width:125px;
+				margin-right:2px;
+				overflow: hidden;
+			}
+		}
+	}
+}
