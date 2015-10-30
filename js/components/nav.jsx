@@ -1,11 +1,18 @@
 require('../scss/nav');
 var React = require('react');
+var Link = require('react-router').Link;
 var $ = require('jquery');
 
+
+// Link to="login">登 录</Link
+// 
+// Link to="userInfo" className='username'>{this.props.userName}</Link
 var NoLogin = React.createClass({
 	render: function(){
 		return (
-			<div className="head-right"><a id="goLogin" href="javascript:;">登 录</a></div>
+			<div className="head-right">
+				<a>登 录</a>
+			</div>
 		)
 	}
 });
@@ -13,7 +20,10 @@ var NoLogin = React.createClass({
 var Login = React.createClass({
 	render: function(){
 		return (
-			<div className="head-right"><a href="#!/userInfo" className="username">{this.props.userName}</a><a href="javascript:;" className="btn-logout">·退出</a></div>
+			<div className="head-right">
+				<a  className='username'>{this.props.userName}</a>
+				<a href="javascript:;" className="btn-logout">·退出</a>
+			</div>
 		)
 	}
 });
@@ -42,9 +52,11 @@ var Nav = React.createClass({
 		return (
 			<div className="head">
 			    <div className="head-left">
-			        <a href="javascript:;"><img src="image/logo.svg" className="logo-img"/></a>
+			        <Link to="robotList">
+			        	<img src="image/logo.svg" className="logo-img"/>
+			        </Link>
 			    </div>
-			{Account}
+				{Account}
 			</div>
 		)
 	}

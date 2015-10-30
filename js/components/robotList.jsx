@@ -1,6 +1,9 @@
 require('../scss/robotList'); //加载样式
 var React = require('react');
+var Router = require('react-router')
+var Link = Router.Link;
 var robots = require('../js/model');
+
 var RobotList = React.createClass({
 	getDefaultProps: function(){
 		return {
@@ -27,6 +30,7 @@ var RobotList = React.createClass({
 											<div className="des-box">		
 												<p>{child.introduce}</p>
 											</div>
+											<Link to="robotDetail" params={{id: child.id}}></Link>
 										</figcaption>
 									</figure>
 								</div>
