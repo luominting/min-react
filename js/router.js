@@ -8,10 +8,9 @@ var Link = Router.Link;
 var StateMixin = Router.State;
 var Redirect = Router.Redirect;
 
+var Nav = require('./nav');
 var RobotList = require('./robotList');
 var RobotDetail = require('./robotDetail');
-var Nav = require('./nav');
-
 
 
 // 应用入口
@@ -30,10 +29,8 @@ var App = React.createClass({
 
 // 定义页面上的路由
 // Route 接受的 props 包括 name、path、handler 等等。其中 name 就是上文提到的路由名称，可以通过 <Link to="路由的名称"> 来生成一个跳转到该路由的链接。
-// // <Route name="robotDetail" path="/robotDetail/:id" handler={RobotDetail} />
-        // <Route name="login" path="/" handler={Login} />
-
-        // <Route name="userInfo" path="/" handler={UserInfo} />
+// <Route name="login" path="/" handler={Login} />
+// <Route name="userInfo" path="/" handler={UserInfo} />
 var appRouter = (
 	<Route handler={App}>
         <Route name="robotList" path="/" handler={RobotList} />
