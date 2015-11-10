@@ -1,8 +1,8 @@
-require('../scss/robotList'); //加载样式
+require('../../scss/robotList'); //加载样式
 var React = require('react');
 var Router = require('react-router')
 var Link = Router.Link;
-var robots = require('../js/model');
+var robots = require('../model');
 
 var RobotList = React.createClass({
 	getDefaultProps: function(){

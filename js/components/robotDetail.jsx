@@ -1,8 +1,8 @@
-require('../scss/robotDetail');
+require('../../scss/robotDetail');
 var React = require('react');
 var Router = require('react-router');
 var StateMixin = Router.State;
-var robots = require('../js/model');
+var robots = require('../model');
 
 var RobotDetail = React.createClass({
     mixins: [StateMixin],
@@ -14,7 +14,6 @@ var RobotDetail = React.createClass({
     render: function(){
         var id = this.getParams().id;
         var robot = this.props.robots.get(id).toJSON()
-        console.log(robot)
 
         return (
             <div id="pagelet-robotDetail">

@@ -25,7 +25,7 @@ module.exports = {
         robotList : [
             'webpack-dev-server/client?http://127.0.0.1:3333',
             'webpack/hot/only-dev-server',
-            './src/index.js'
+            './js/index.js'
         ],
     },
     //入口文件输出配置 （即入口文件最终要生成什么名字的文件、存放到哪里）
@@ -60,7 +60,7 @@ module.exports = {
     //其它解决方案配置
     resolve: {
          //查找module的话从这里开始查找
-        root: '/Library/WebServer/Documents/react/src', //绝对路径
+        root: '/Library/WebServer/Documents/react/js/components/', //绝对路径
         //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
         extensions: ['', '.js', '.json', '.scss','.jsx'],
         //模块别名定义，方便后续直接引用别名，无须多写长长的地址

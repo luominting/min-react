@@ -8,9 +8,10 @@ var Link = Router.Link;
 var StateMixin = Router.State;
 var Redirect = Router.Redirect;
 
-var Nav = require('./nav');
-var RobotList = require('./robotList');
-var RobotDetail = require('./robotDetail');
+var Nav = require('./components/nav');
+var RobotList = require('./components/robotList');
+var RobotDetail = require('./components/robotDetail');
+var Login = require('./components/login');
 
 
 // 应用入口
@@ -35,6 +36,7 @@ var appRouter = (
 	<Route handler={App}>
         <Route name="robotList" path="/" handler={RobotList} />
         <Route name="robotDetail" path="/robotDetail/:id" handler={RobotDetail} />
+        <Route name="login" path="/login" handler={Login} />
     </Route>
 );
 

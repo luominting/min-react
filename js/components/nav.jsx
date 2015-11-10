@@ -1,4 +1,4 @@
-require('../scss/nav');
+require('../../scss/nav');
 var React = require('react');
 var Link = require('react-router').Link;
 var $ = require('jquery');
@@ -39,7 +39,7 @@ var Nav = React.createClass({
 	            if(respon.status == "YES"){
 	                _this.setState({isLogin: true,userName :respon.name});
 	            }else{
-	                _this.setState({isLogin: true});
+	                _this.setState({isLogin: false});
 	            }
 	        },
 	        error:function(){
@@ -48,7 +48,7 @@ var Nav = React.createClass({
 	    });
 	},
 	render: function(){
-		var Account = (this.isLogin) ? <Login userName={this.userName} /> : <NoLogin />;
+		var Account = (this.state.isLogin) ? <Login userName={this.state.userName} /> : <NoLogin />;
 		return (
 			<div className="head">
 			    <div className="head-left">
