@@ -5,6 +5,9 @@ var StateMixin = Router.State;
 var robots = require('../model');
 
 var DetailComponent = React.createClass({
+    propTypes: {
+        child: React.PropTypes.array.isRequired
+    },
     render: function(){
         return (
             <div className="xq-img-div">
@@ -22,7 +25,10 @@ var RobotDetail = React.createClass({
     },
     render: function(){
         var id = this.getParams().id;
-        var robot = this.props.robots.get(id).toJSON()
+        var robot = this.props.robots.get(id).toJSON();
+        var elements =  robot.coverImage.map(function (child, idx){
+                            return <DetailComponent child={child}/>;
+                        })
         return (
             <div id="pagelet-robotDetail">
                 <div className="main">
@@ -32,11 +38,7 @@ var RobotDetail = React.createClass({
                             {robot.introduce}
                         </div>
                     </div>
-                    {
-                        robot.coverImage.map(function (child, idx){
-                            return <DetailComponent child={child}/>;
-                        })
-                    }
+                    {elements}
                 </div>
             </div>
         );

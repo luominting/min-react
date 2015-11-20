@@ -5,15 +5,20 @@ var Link = Router.Link;
 var robots = require('../model');
 
 var RoboComponent = React.createClass({
+	propTypes: {
+		DOMClass: React.PropTypes.string.isRequired,
+	    child: React.PropTypes.array.isRequired
+	},
 	render: function(){
-		return (<div className={this.props.DOMClass} key={this.props.child.id}>
-					<figure className="effect-jazz" id={"robotId"+this.props.child.id}>
-						<img className="robo-list" src={"image/"+this.props.child.imageUrl}/>
+		var child = this.props.child;
+		return (<div className={this.props.DOMClass} key={child.id}>
+					<figure className="effect-jazz" id={"robotId"+child.id}>
+						<img className="robo-list" src={"image/"+child.imageUrl}/>
 						<figcaption>
 							<div className="des-box">		
-								<p>{this.props.child.introduce}</p>
+								<p>{child.introduce}</p>
 							</div>
-							<Link to="robotDetail" params={{id: this.props.child.id}}></Link>
+							<Link to="robotDetail" params={{id: child.id}}></Link>
 						</figcaption>
 					</figure>
 				</div>)

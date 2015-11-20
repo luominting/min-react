@@ -4,20 +4,23 @@ var Link = require('react-router').Link;
 var $ = require('jquery');
 
 
-// Link to="login">登 录</Link
+// 
 // 
 // Link to="userInfo" className='username'>{this.props.userName}</Link
 var NoLogin = React.createClass({
 	render: function(){
 		return (
 			<div className="head-right">
-				<a>登 录</a>
+				<Link to="login">登 录</Link>
 			</div>
 		)
 	}
 });
 
 var Login = React.createClass({
+	propTypes: {
+		userName: React.PropTypes.string.isRequired
+	},
 	render: function(){
 		return (
 			<div className="head-right">

@@ -1,34 +1,9 @@
 require('../../scss/login');
 var React = require('react');
-var $ = require('jquery');
+var $     = require('jquery');
+var util  = require('../util');
+var Input = require('./input');
 
-var {
-	PropTypes,
-} = React;
-
-var Input = React.createClass({
-	propTypes: {
-		placeholder: PropTypes.string,
-		id: PropTypes.string,
-		onRemove: React.PropTypes.func.isRequired
-	},
-	render: function() {
-		return (
-			<div className="form-input">
-				<input id={this.props.id}
-					placeholder={this.props.placeholder} 
-					ref={(input) => {this._input = input}}
-					onBlur={this.handlePhoneOrEmail}/>
-			</div>
-		);
-	},
-	handleRemove: function () {
-	    this.props.onRemove();
-	},
-	value: function() {
-		return this._input.props.value;
-	}
-});
 
 var loginBox = React.createClass({
 	getInitialState: function() {
@@ -40,14 +15,14 @@ var loginBox = React.createClass({
 		var curState = this.state.curState;
 		if (curState === "loginWithWeb") {
 			return(
-				<div className="href" id="forgetPwdBtn">
+				<div className="href">
 					<a href="#!/forgetPwd" class="forget-pwd">忘记密码？</a>
 				</div>
 			);
 		}else if (curState === "loginWithApp" || curState === "registerWithPhone") {
 			return (
 				<div className="href">
-					<a href="javascript:;" id="registerTip" className="codeTip">没有收到验证码？</a>
+					<a href="javascript:;" className="codeTip">没有收到验证码？</a>
 				</div>
 			)
 		}
@@ -58,7 +33,6 @@ var loginBox = React.createClass({
 			return (
 				<p className="agree">
 					<i className="icon iconfont icon-radio-uncheck my-radio" ></i>我已阅读并同意<a href="protocol.html" target="_blank">《RoboMing的条款》</a>
-					<i className="icon iconfont icon-gantanhao err agree-icon"  id="protocol" title ='请先同意本网站条款'></i>
 				</p>
 			)
 		}
@@ -103,12 +77,6 @@ var loginBox = React.createClass({
 		}
 		return "登陆";
 	},
-	handlePhoneOrEmail: function(){
-		this.refs.myAccount.focus()
-		debugger
-		var value = this.refs.myAccount.value;
-		console.log(value)
-	},
 	render: function(){
 		var otherInput = this._getOtherInputs().Inputs;
 		var btnId = this._getOtherInputs().btnId;
@@ -119,17 +87,39 @@ var loginBox = React.createClass({
 		return (
 			<div id="pagelet-login" className="container">
 				<h3 className="title">欢迎</h3>
-				<Input placeholder="请输入手机或邮箱"/>
+				<Input placeholder="请输入手机或邮箱" onBlur={this.handlePhoneOrEmail}/>
 				{otherInput}
-				{agreeTip}
 				<div className="btn-box">
+					{agreeTip}
 					{forgetPass}
 					<button id={btnId} >{btnText}</button>
 				</div>
 			</div>
 		);
 	},
-	
+	handlePhoneOrEmail: function(value){
+		if(!value){
+			return;
+		}else if(util.verify.checkPhone(value)){
+			var data = (util.ajax.checkPhone(value)).status;
+			if(data=="dose not exist"){
+				this.setState({curState: 'registerWithPhone'});
+			}else if(data=="no password"){
+				this.setState({curState: 'loginWithApp'});
+			}else if(data=="has password"){
+				this.setState({curState: 'loginWithWeb'});
+			}
+		}else if(util.verify.checkEmail(value)){
+			var data = (util.ajax.checkEmail(value)).msg;
+			if(data == 'existed'){
+				this.setState({curState: 'loginWithWeb'});
+			}else{
+				this.setState({curState: 'registerWithEmail'});
+			}
+		}else{
+			alert('手机或邮箱格式错误！')
+		}
+	}
 });
 
 module.exports = loginBox;
