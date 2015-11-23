@@ -4,6 +4,9 @@ var $     = require('jquery');
 var util  = require('../util');
 var Input = require('./input');
 
+var  Timer = React.createClass({
+
+});
 
 var loginBox = React.createClass({
 	getInitialState: function() {
